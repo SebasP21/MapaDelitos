@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div id="map1"></div>
+	<div id="map2"></div>
+	<div class="titles1">
+<h2>MAPA HOMICIDIOS</h2>
+</div>
+</br>
+<div class="titles2">
+<h2>MAPA HURTO DE CELULARES</h2>
+	</div>
+</body>
+<script src="js/jquery.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
+
+<script>
+	    var markers = [];
+
+    function initialize() {
+
+        var beaches = [
+					[
+			      'AMAZONAS',
+
+
+			       -2.060723197046808,
+			       -71.88887100000005,
+			       1
+			    ],
+			    [
+			      'ANTIOQUIA',
+
+
+			       7.154151904217538,
+			       -75.50333949999998,
+			       1
+			    ],
+			    [
+			      'ARAUCA',
+
+
+			       6.569398099910278,
+			       -70.89617344999999,
+			       1
+			    ],
+			    [
+			      'ATLANTICO',
+
+
+			       10.681827708739354,
+			       -74.99119954999998,
+			       1
+			    ],
+			    [
+			      'BOLIVAR',
+
+
+			       8.906336565065955,
+			       -74.77308199999999,
+			       1
+			    ],
+			    [
+			      'BOYACA',
+
+
+			       5.856697881586461,
+			       -73.30628899999999,
+			       1
+			    ],
+			    [
+			      'CALDAS',
+
+
+			       5.2900581880189,
+			       -75.27392149999997,
+			       1
+			    ],
+			    [
+			      'CAQUETA',
+
+
+			       1.1302098848125068,
+			       -73.8139759,
+			       1
+			    ],
+			    [
+			      'CASANARE',
+
+
+			       5.293822528018666,
+			       -71.45550990000004,
+			       1
+			    ],
+			    [
+			      'CAUCA',
+
+
+			       2.1453202119731296,
+			       -76.98349410000003,
+			       1
+			    ],
+			    [
+			      'CESAR',
+
+
+			       9.275416653808293,
+			       -73.51315805000002,
+			       1
+			    ],
+			    [
+			      'CHOCO',
+
+
+			       6.338134905872151,
+			       -76.94158699999997,
+			       1
+			    ],
+			    [
+			      'CORDOBA',
+
+
+			       8.400288391227862,
+			       -75.64690654999998,
+			       1
+			    ],
+			    [
+			      'CUNDINAMARCA',
+
+
+			       4.783307904779826,
+			       -73.97070599999995,
+			       1
+			    ],
+			    [
+			      'GUANIA',
+
+
+			       2.5722819366346825,
+			       -68.88649205000002,
+			       1
+			    ],
+			    [
+			      'GUAVIARE',
+
+
+			       1.7916202039630653,
+			       -71.8260525,
+			       1
+			    ],
+			    [
+			      'HUILA',
+
+
+			       2.6728748219834824,
+			       -75.51755550000001,
+			       1
+			    ],
+			    [
+			      'GUAJIRA',
+
+
+			       11.42980339888069,
+			       -72.38893404999999,
+			       1
+			    ],
+			    [
+			      'MAGDALENA',
+
+
+			       10.13300739568375,
+			       -74.24518949999998,
+			       1
+			    ],
+			    [
+			      'META',
+
+
+			       3.268542431978724,
+			       -72.99519045,
+			       1
+			    ],
+			    [
+			      'NARIÑO',
+
+
+			       1.5268551321616022,
+			       -77.92222500000003,
+			       1
+			    ],
+			    [
+			      'NORTE DE SANTANDER',
+
+
+			       8.083616596832998,
+			       -72.82270755000002,
+			       1
+			    ],
+			    [
+			      'PUTUMAYO',
+
+
+			       0.47134923767189707,
+			       -75.5322779,
+			       1
+			    ],
+			    [
+			      'QUINDIO',
+
+
+			       4.397769734207386,
+			       -75.63968900000003,
+			       1
+			    ],
+			    [
+			      'RISARALDA',
+
+
+			       5.097131851670936,
+			       -75.8126345,
+			       1
+			    ],
+			    [
+			      'San Andrés y Providencia',
+
+
+			       12.937837669711849,
+			       -81.54253945000005,
+			       1
+			    ],
+			    [
+			      'SANTANDER',
+
+
+			       6.929438442460402,
+			       -73.50284350000004,
+			       1
+			    ],
+			    [
+			      'SUCRE',
+
+
+			       9.213100422754575,
+			       -75.20493249999998,
+			       1
+			    ],
+			    [
+			      'TOLIMA',
+
+
+			       4.095057078287823,
+			       -75.29164695000003,
+			       1
+			    ],
+			    [
+			      'VALLE',
+
+			       4.038988439228275,
+			       -76.62906905,
+			       1
+			    ],
+			    [
+			      'VAUPES',
+
+
+			       0.42477493641339653,
+			       -70.57252645,
+			       1
+			    ],
+			    [
+			      'VICHADA',
+
+
+			       4.532074073322644,
+			       -69.24093849999997,
+			       1
+			    ]
+			  ];
+
+
+        var map = new google.maps.Map(document.getElementById('map1'), {
+            zoom: 6,
+            center: new google.maps.LatLng(4.532074073322644, -69.24093849999997),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        var infowindow = new google.maps.InfoWindow();
+
+        for (var i = 0; i < beaches.length; i++) {
+
+            var newMarker = new google.maps.Marker({
+                position: new google.maps.LatLng(beaches[i][1], beaches[i][2]),
+                map: map,
+                title: beaches[i][0]
+            });
+
+            google.maps.event.addListener(newMarker, 'click', (function (newMarker, i) {
+                return function () {
+
+                	reuqestDelitos(beaches[i][0]);
+                    infowindow.setContent(beaches[i][0]);
+                    infowindow.open(map, newMarker);
+
+                }
+            })(newMarker, i));
+
+            markers.push(newMarker);
+        }
+        function reuqestDelitos(departamento)
+        {
+
+        	$.ajax({
+        		url: 'https://www.datos.gov.co/resource/npnf-f7xg.json?$selecT=departamento&departamento='+departamento,
+        		success:function(data){
+        				alert("Homicidios: " + data.length);
+        		}
+        	});
+
+
+        }
+    }
+
+    initialize();
+</script>
+
+<script>
+	    var markers = [];
+
+    function initialize() {
+
+        var beaches = [
+    [
+      'AMAZONAS',
+
+
+       -2.060723197046808,
+       -71.88887100000005,
+       1
+    ],
+    [
+      'ANTIOQUIA',
+
+
+       7.154151904217538,
+       -75.50333949999998,
+       1
+    ],
+    [
+      'ARAUCA',
+
+
+       6.569398099910278,
+       -70.89617344999999,
+       1
+    ],
+    [
+      'ATLANTICO',
+
+
+       10.681827708739354,
+       -74.99119954999998,
+       1
+    ],
+    [
+      'BOLIVAR',
+
+
+       8.906336565065955,
+       -74.77308199999999,
+       1
+    ],
+    [
+      'BOYACA',
+
+
+       5.856697881586461,
+       -73.30628899999999,
+       1
+    ],
+    [
+      'CALDAS',
+
+
+       5.2900581880189,
+       -75.27392149999997,
+       1
+    ],
+    [
+      'CAQUETA',
+
+
+       1.1302098848125068,
+       -73.8139759,
+       1
+    ],
+    [
+      'CASANARE',
+
+
+       5.293822528018666,
+       -71.45550990000004,
+       1
+    ],
+    [
+      'CAUCA',
+
+
+       2.1453202119731296,
+       -76.98349410000003,
+       1
+    ],
+    [
+      'CESAR',
+
+
+       9.275416653808293,
+       -73.51315805000002,
+       1
+    ],
+    [
+      'CHOCO',
+
+
+       6.338134905872151,
+       -76.94158699999997,
+       1
+    ],
+    [
+      'CORDOBA',
+
+
+       8.400288391227862,
+       -75.64690654999998,
+       1
+    ],
+    [
+      'CUNDINAMARCA',
+
+
+       4.783307904779826,
+       -73.97070599999995,
+       1
+    ],
+    [
+      'GUANIA',
+
+
+       2.5722819366346825,
+       -68.88649205000002,
+       1
+    ],
+    [
+      'GUAVIARE',
+
+
+       1.7916202039630653,
+       -71.8260525,
+       1
+    ],
+    [
+      'HUILA',
+
+
+       2.6728748219834824,
+       -75.51755550000001,
+       1
+    ],
+    [
+      'GUAJIRA',
+
+
+       11.42980339888069,
+       -72.38893404999999,
+       1
+    ],
+    [
+      'MAGDALENA',
+
+
+       10.13300739568375,
+       -74.24518949999998,
+       1
+    ],
+    [
+      'META',
+
+
+       3.268542431978724,
+       -72.99519045,
+       1
+    ],
+    [
+      'NARIÑO',
+
+
+       1.5268551321616022,
+       -77.92222500000003,
+       1
+    ],
+    [
+      'NORTE DE SANTANDER',
+
+
+       8.083616596832998,
+       -72.82270755000002,
+       1
+    ],
+    [
+      'PUTUMAYO',
+
+
+       0.47134923767189707,
+       -75.5322779,
+       1
+    ],
+    [
+      'QUINDIO',
+
+
+       4.397769734207386,
+       -75.63968900000003,
+       1
+    ],
+    [
+      'RISARALDA',
+
+
+       5.097131851670936,
+       -75.8126345,
+       1
+    ],
+    [
+      'San Andrés y Providencia',
+
+
+       12.937837669711849,
+       -81.54253945000005,
+       1
+    ],
+    [
+      'SANTANDER',
+
+
+       6.929438442460402,
+       -73.50284350000004,
+       1
+    ],
+    [
+      'SUCRE',
+
+
+       9.213100422754575,
+       -75.20493249999998,
+       1
+    ],
+    [
+      'TOLIMA',
+
+
+       4.095057078287823,
+       -75.29164695000003,
+       1
+    ],
+    [
+      'VALLE',
+
+       4.038988439228275,
+       -76.62906905,
+       1
+    ],
+    [
+      'VAUPES',
+
+
+       0.42477493641339653,
+       -70.57252645,
+       1
+    ],
+    [
+      'VICHADA',
+
+
+       4.532074073322644,
+       -69.24093849999997,
+       1
+    ]
+  ];
+
+        var map = new google.maps.Map(document.getElementById('map2'), {
+            zoom: 6,
+            center: new google.maps.LatLng(4.532074073322644, -69.2409384999998),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        var infowindow = new google.maps.InfoWindow();
+
+        for (var i = 0; i < beaches.length; i++) {
+
+            var newMarker = new google.maps.Marker({
+                position: new google.maps.LatLng(beaches[i][1], beaches[i][2]),
+                map: map,
+                title: beaches[i][0]
+            });
+
+            google.maps.event.addListener(newMarker, 'click', (function (newMarker, i) {
+                return function () {
+
+                	reuqestDelitos(beaches[i][0]);
+                    infowindow.setContent(beaches[i][0]);
+                    infowindow.open(map, newMarker);
+
+                }
+            })(newMarker, i));
+
+            markers.push(newMarker);
+        }
+        function reuqestDelitos(departamento)
+        {
+
+        	$.ajax({
+        		url: 'https://www.datos.gov.co/resource/s5e2-rk95.json?$selecT=departamento&departamento='+departamento,
+        		success:function(data){
+        				alert("Hurto celulares: "+data.length);
+        		}
+        	});
+
+
+        }
+    }
+
+    initialize();
+</script>
+</html>

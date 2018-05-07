@@ -1,0 +1,27 @@
+ html, body, #map1 {
+     height: 95%;
+     width: 70%;
+     margin: 0px;
+     padding: 0px;
+     left: 20%;
+ }
+
+ html, body, #map2 {
+     height: 95%;
+     width: 70%;
+     margin: 0px;
+     padding: 0px;
+     left: 115%;
+     top: -96%;
+ }
+
+div.titles1{
+  position: relative;
+  left: 20%;
+  top: -95%;
+}
+div.titles2{
+  position: relative;
+  left: 115%;
+  top: -110%;
+}
